@@ -1,3 +1,3 @@
-# Innov8-2024
+# Innov8_ABHYAS Fitness Website
 BBIT Hackathon
 Author- Sayan
