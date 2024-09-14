@@ -1,0 +1,51 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const exerciseForm = document.getElementById('exercise-form');
+    const exerciseContainer = document.getElementById('exercise-container');
+
+    // Sample exercises
+    const exercises = [
+        { name: 'Push Ups', type: 'Strength', reps: '3 sets of 15 reps' },
+        { name: 'Running', type: 'Cardio', reps: '30 minutes' }
+    ];
+
+    // Function to display exercises
+    function displayExercises() {
+        exerciseContainer.innerHTML = ''; // Clear previous exercises
+
+        exercises.forEach((exercise, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span><strong>${exercise.name}</strong> (${exercise.type}) - ${exercise.reps}</span>
+                <button class="remove-btn" data-index="${index}">Remove</button>
+            `;
+            exerciseContainer.appendChild(li);
+        });
+    }
+
+    // Add new exercise
+    exerciseForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const exerciseName = document.getElementById('exercise-name').value;
+        const exerciseType = document.getElementById('exercise-type').value;
+        const exerciseReps = document.getElementById('exercise-reps').value;
+
+        exercises.push({ name: exerciseName, type: exerciseType, reps: exerciseReps });
+        displayExercises();
+
+        // Clear form inputs
+        exerciseForm.reset();
+    });
+
+    // Remove exercise
+    exerciseContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('remove-btn')) {
+            const index = e.target.getAttribute('data-index');
+            exercises.splice(index, 1);
+            displayExercises();
+        }
+    });
+
+    // Initial display of exercises
+    displayExercises();
+});
